@@ -25,7 +25,7 @@ function lengthPrompt() {
 var lowerCaseInput;
 
 function getLowerCaseInput() {
-  lowerCaseInput = confirm("Would you like your randomly generated password to include lower case letters? Click OK to include them, and CANCEL to exclude.");
+  lowerCaseInput = confirm("Would you like your randomly generated password to include lower case letters? Click OK to include them or CANCEL to exclude.");
   if (lowerCaseInput) {
     lowerCaseInput = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     alert("You have chosen to include lower case letters in your randomly generated password.");
@@ -42,22 +42,69 @@ var upperCaseInput;
 //Fun bug here: I tried to use an array map method and toUpperCase string method, although I realized that there was nothing to capitalize if the user chose to exclude lower case letters. 
 
 function getUpperCaseInput() {
-  upperCaseInput = confirm("Would you like your randomly generated password to include upper case letters? Click OK to include them, and CANCEL to exclude.");
+  upperCaseInput = confirm("Would you like your randomly generated password to include upper case letters? Click OK to include them or CANCEL to exclude.");
   if (upperCaseInput) {
     upperCaseInput = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    alert("You have chosen to include upper case letters in your randomly generated password.");
   } else {
     upperCaseInput = "";
+    alert("You have chosen to exclude upper case letters from your randomly generated password.");
   }
 }
+
+var numberInput;
+
+function getNumberInput() {
+  numberInput = confirm("Would you like your randomly generated password to include numbers? Click OK to include them or CANCEL to exclude.");
+  if (numberInput) {
+    numberInput = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    alert("You have chosen to include numbers in your randomly generated password.");
+  } else {
+    numberInput = "";
+    alert("You have chosen to exclude numbers from your randomly geenrated password.");
+  }
+}
+
+var specialCharInput;
+
+function getSpecialCharInput() {
+  specialCharInput = confirm("Would you like your randomly generated password to include special characters? Click OK to include them or CANCEL to exclude.");
+  if (specialCharInput) {
+    specialCharInput = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]","^", "_", "`", "{", "|", "}", "~"];
+    alert("You have chosen to include special characters in your randomly generated password.");
+  } else {
+    specialCharInput = "";
+    alert("You have chosen to exclude special characters from your randomly generated password.");
+  }
+}
+
+//Here, I've finished writing each of the functions required for receiving and logging user input. I'll write one more short function that checks user input to ensure they haven't excluded all classes of characters.
+//Then, for concision's sake, I'll compress into a single getUserInput function the four prompt functions. It will look much sharper in the final generatePassword function.
+
+function checkUserInput() {
+  if ((lowerCaseInput === "") && (upperCaseInput === "") && (numberInput === "") && (specialCharInput === "")) {
+    alert("User, I am a machine, not a miracle worker. I can not randomly generate a password composed of characters that excludes all classes of characters. Please choose at least one class of characters to include in your randomly generated password.");
+    getUserInput();
+  } else {
+    alert("Give me a moment while I randomly generate your password!");
+  }
+}
+
+function getUserInput() {
+  getLowerCaseInput();
+  getUpperCaseInput();
+  getNumberInput();
+  getSpecialCharInput();
+  checkUserInput();
+}
+
+//Next, I'll want to concatenate the four arrays held in the separate input variables into a single userInput array. 
+
 
 
 function generatePassword() {
   lengthPrompt();
-  console.log(passwordLength);
-  getLowerCaseInput();
-  console.log(lowerCaseInput);
-  getUpperCaseInput();
-  console.log(upperCaseInput);
+  getUserInput();
 }
 
 // Write password to the #password input
