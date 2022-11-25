@@ -20,11 +20,28 @@ function lengthPrompt() {
   
 //passwordLength now holds numerically the length of the string that will be the final password generated. 
 
+//Now we will make a function to find out if users want to use each specific type of character, starting with lowerCase.
 
+var lowerCaseInput;
+
+function getLowerCaseInput() {
+  lowerCaseInput = confirm("Would you like your randomly generated password to include lower case letters? Click OK to include them, and CANCEL to exclude.");
+  if (lowerCaseInput) {
+    lowerCaseInput = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    alert("You have chosen to include lower case letters in your randomly generated password.");
+  } else {
+    lowerCaseInput = "";
+    alert("You have chosen to exclude lower case letters from your randomly generated password.");
+  }
+}
+
+//The variable lowerCaseInput now holds either an array with each individual character as an element in the array or an empty string. We will now run the same process with each other class of character, with the ultimate aim of concatenating the arrays together.
 
 function generatePassword() {
   lengthPrompt();
   console.log(passwordLength);
+  getLowerCaseInput();
+  console.log(lowerCaseInput);
 }
 
 // Write password to the #password input
