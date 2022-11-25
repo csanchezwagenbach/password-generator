@@ -37,11 +37,27 @@ function getLowerCaseInput() {
 
 //The variable lowerCaseInput now holds either an array with each individual character as an element in the array or an empty string. We will now run the same process with each other class of character, with the ultimate aim of concatenating the arrays together.
 
+var upperCaseInput;
+
+//Fun bug here: I tried to use an array map method and toUpperCase string method, although I realized that there was nothing to capitalize if the user chose to exclude lower case letters. 
+
+function getUpperCaseInput() {
+  upperCaseInput = confirm("Would you like your randomly generated password to include upper case letters? Click OK to include them, and CANCEL to exclude.");
+  if (upperCaseInput) {
+    upperCaseInput = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+  } else {
+    upperCaseInput = "";
+  }
+}
+
+
 function generatePassword() {
   lengthPrompt();
   console.log(passwordLength);
   getLowerCaseInput();
   console.log(lowerCaseInput);
+  getUpperCaseInput();
+  console.log(upperCaseInput);
 }
 
 // Write password to the #password input
