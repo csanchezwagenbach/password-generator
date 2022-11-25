@@ -9,9 +9,6 @@ var passwordLength;
 function lengthPrompt() {
   lengthInput = prompt("How many characters would you like in your random password?", "Enter an integer between 8 and 128");
   passwordLength = Math.floor(Number(lengthInput));
-  console.log(lengthInput);
-  console.log(passwordLength);
-  console.log(typeof passwordLength);
   if ((passwordLength < 8) || (passwordLength > 128) || (!passwordLength)) {
     alert("You must enter an integer between 8 and 128!")
     lengthPrompt();
@@ -57,7 +54,7 @@ var numberInput;
 function getNumberInput() {
   numberInput = confirm("Would you like your randomly generated password to include numbers? Click OK to include them or CANCEL to exclude.");
   if (numberInput) {
-    numberInput = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    numberInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     alert("You have chosen to include numbers in your randomly generated password.");
   } else {
     numberInput = "";
@@ -100,11 +97,25 @@ function getUserInput() {
 
 //Next, I'll want to concatenate the four arrays held in the separate input variables into a single userInput array. 
 
+var userInput;
 
+function makeUserInput() {
+  if (lowerCaseInput !== "") {
+    userInput = lowerCaseInput.concat(upperCaseInput, numberInput, specialCharInput);
+  } else if (lowerCaseInput === "") {
+    userInput = upperCaseInput.concat(numberInput, specialCharInput);
+  } else if ((lowerCaseInput === "") && (upperCaseInput === "")) {
+    userInput = numberInput.concat(specialCharInput);
+  } else {
+    userInput = specialCharInput;
+  } 
+}
 
 function generatePassword() {
   lengthPrompt();
   getUserInput();
+  makeUserInput();
+  console.log(userInput);
 }
 
 // Write password to the #password input
