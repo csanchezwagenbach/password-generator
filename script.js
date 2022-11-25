@@ -27,7 +27,7 @@ function getLowerCaseInput() {
     lowerCaseInput = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     alert("You have chosen to include lower case letters in your randomly generated password.");
   } else {
-    lowerCaseInput = "";
+    lowerCaseInput = false;
     alert("You have chosen to exclude lower case letters from your randomly generated password.");
   }
 }
@@ -44,7 +44,7 @@ function getUpperCaseInput() {
     upperCaseInput = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     alert("You have chosen to include upper case letters in your randomly generated password.");
   } else {
-    upperCaseInput = "";
+    upperCaseInput = false;
     alert("You have chosen to exclude upper case letters from your randomly generated password.");
   }
 }
@@ -57,7 +57,7 @@ function getNumberInput() {
     numberInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     alert("You have chosen to include numbers in your randomly generated password.");
   } else {
-    numberInput = "";
+    numberInput = false;
     alert("You have chosen to exclude numbers from your randomly geenrated password.");
   }
 }
@@ -70,7 +70,7 @@ function getSpecialCharInput() {
     specialCharInput = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]","^", "_", "`", "{", "|", "}", "~"];
     alert("You have chosen to include special characters in your randomly generated password.");
   } else {
-    specialCharInput = "";
+    specialCharInput = false;
     alert("You have chosen to exclude special characters from your randomly generated password.");
   }
 }
@@ -79,7 +79,7 @@ function getSpecialCharInput() {
 //Then, for concision's sake, I'll compress into a single getUserInput function the four prompt functions. It will look much sharper in the final generatePassword function.
 
 function checkUserInput() {
-  if ((lowerCaseInput === "") && (upperCaseInput === "") && (numberInput === "") && (specialCharInput === "")) {
+  if ((!lowerCaseInput) && (!upperCaseInput) && (!numberInput) && (!specialCharInput)) {
     alert("User, I am a machine, not a miracle worker. I can not randomly generate a password composed of characters that excludes all classes of characters. Please choose at least one class of characters to include in your randomly generated password.");
     getUserInput();
   } else {
@@ -100,11 +100,11 @@ function getUserInput() {
 var userInput;
 
 function makeUserInput() {
-  if (lowerCaseInput !== "") {
+  if (lowerCaseInput) {
     userInput = lowerCaseInput.concat(upperCaseInput, numberInput, specialCharInput);
-  } else if (lowerCaseInput === "") {
+  } else if (!lowerCaseInput) {
     userInput = upperCaseInput.concat(numberInput, specialCharInput);
-  } else if ((lowerCaseInput === "") && (upperCaseInput === "")) {
+  } else if ((!lowerCaseInput) && (!upperCaseInput)) {
     userInput = numberInput.concat(specialCharInput);
   } else {
     userInput = specialCharInput;
