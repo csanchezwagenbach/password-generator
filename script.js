@@ -99,24 +99,50 @@ function getUserInput() {
 
 var userInput;
 
+//The part below took me awhile to figure out, and I am not totally satisfied with the solution I came up with in spite of its functionality.
+//I ran into the problem of how to effectively concatenate arrays that may or may not actually carry any elements within them. Essentially, how do I include populated arrays and exclude unpopulated ones?
+//I set the undesired arrays equal to false, and worked out each possible iteration of user inputs so that I could individually select for each possibility.
+//While this effectively created a single array with all desired elements, I am not convinced that there wasn't a far more efficient method.
+
 function makeUserInput() {
-  if (lowerCaseInput) {
+  if ((lowerCaseInput) && (upperCaseInput) && (numberInput) && (specialCharInput)) {
     userInput = lowerCaseInput.concat(upperCaseInput, numberInput, specialCharInput);
-  } else if (!lowerCaseInput) {
+  } else if ((lowerCaseInput) && (upperCaseInput) && (numberInput) && (!specialCharInput)) {
+    userInput = lowerCaseInput.concat(upperCaseInput, numberInput);
+  } else if ((lowerCaseInput) && (upperCaseInput) && (!numberInput) && (specialCharInput)) {
+    userInput = lowerCaseInput.concat(upperCaseInput, specialCharInput);
+  } else if ((lowerCaseInput) && (!upperCaseInput) && (numberInput) && (specialCharInput)) {
+    userInput = lowerCaseInput.concat(numberInput, specialCharInput);
+  } else if ((lowerCaseInput) && (upperCaseInput) && (!numberInput) && (!specialCharInput)) {
+    userInput = lowerCaseInput.concat(upperCaseInput);
+  } else if ((lowerCaseInput) && (!upperCaseInput) && (numberInput) && (!specialCharInput)) {
+    userInput = lowerCaseInput.concat(numberInput);
+  } else if ((lowerCaseInput) && (!upperCaseInput) && (!numberInput) && (specialCharInput)) {
+    userInput = lowerCaseInput.concat(specialCharInput);
+  } else if ((lowerCaseInput) && (!upperCaseInput) && (!numberInput) && (!specialCharInput)) {
+    userInput = lowerCaseInput;
+  } else if ((!lowerCaseInput) && (upperCaseInput) && (numberInput) && (specialCharInput)) {
     userInput = upperCaseInput.concat(numberInput, specialCharInput);
-  } else if ((!lowerCaseInput) && (!upperCaseInput)) {
+  } else if ((!lowerCaseInput) && (upperCaseInput) && (numberInput) && (!specialCharInput)) {
+    userInput = upperCaseInput.concat(numberInput);
+  } else if ((!lowerCaseInput) && (upperCaseInput) && (!numberInput) && (specialCharInput)) {
+    userInput = upperCaseInput.concat(specialCharInput);
+  } else if ((!lowerCaseInput) && (upperCaseInput) && (!numberInput) && (!specialCharInput)) {
+    userInput = upperCaseInput;
+  } else if ((!lowerCaseInput) && (!upperCaseInput) && (numberInput) && (specialCharInput)) {
     userInput = numberInput.concat(specialCharInput);
+  } else if ((!lowerCaseInput) && (!upperCaseInput) && (numberInput) && (!specialCharInput)) {
+    userInput = numberInput;
   } else {
     userInput = specialCharInput;
-  } 
+  }
 }
+
 
 function generatePassword() {
   lengthPrompt();
   getUserInput();
   makeUserInput();
-  console.log(numberInput);
-  console.log(specialCharInput);
   console.log(userInput);
 }
 
