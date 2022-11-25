@@ -115,6 +115,8 @@ function generatePassword() {
   lengthPrompt();
   getUserInput();
   makeUserInput();
+  console.log(numberInput);
+  console.log(specialCharInput);
   console.log(userInput);
 }
 
