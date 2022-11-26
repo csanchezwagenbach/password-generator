@@ -139,11 +139,27 @@ function makeUserInput() {
 }
 
 
+//I'll now want to actually write the function that will randomly select an element from the userInput array and add it to a string.
+//I'll use a forLoop to try this out. The function will reiterate itself the number of times saved in the passwordLength variable.
+
+var randomNumber;
+var randomCharacterHolder;
+var randomString = "";
+
+function randomPassword() {
+  for (i=0; i < passwordLength; i++) {
+  randomNumber = Math.floor(Math.random() * userInput.length);
+  randomCharacterHolder = (randomNumber, userInput[randomNumber]);
+  randomString = randomString.concat(randomCharacterHolder)
+  }
+}
+
 function generatePassword() {
   lengthPrompt();
   getUserInput();
   makeUserInput();
-  console.log(userInput);
+  randomPassword();
+  return (randomString);
 }
 
 // Write password to the #password input
